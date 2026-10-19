@@ -38,3 +38,16 @@ Sistemul definește 3 roluri distincte:
 * **Categorii de bilete (`ticket_categories`)** — tip bilet (ex. VIP, Standard), preț unitar, stoc total și disponibil.
 * **Comenzi (`bookings`)** — utilizator cumpărător, data rezervării, statusul comenzii, total de plată.
 * **Bilete emise (`tickets`)** — cod unic bilet (UUID/QR), categoria de bilet, ID-ul comenzii, status utilizare la intrare.
+
+## 4. Structura bazei de date (Etapa 1)
+Schema conține 6 tabele relaționale normalizate:
+- `users`: Gestionarea conturilor și rolurilor (`CLIENT`, `ORGANIZER`, `ADMIN`).
+- `venues`: Săli și arene (ex. Arena Națională, BTarena) cu validare pe capacitate pozitivă.
+- `events`: Evenimentele programate, legate de organizator și locație.
+- `ticket_categories`: Zone de preț per concert, cu constrângere de integritate pe stoc.
+- `bookings`: Tranzacțiile și comenzile efectuate de utilizatori.
+- `tickets`: Bilete emise individual cu cod unic UUID de acces și status de validare.
+
+### Rularea scripturilor SQL:
+1. Crearea tabelelor: `psql -d ticket_booking_db -f sql/schema.sql` (sau executare în pgAdmin 4).
+2. Încărcarea datelor de test: `psql -d ticket_booking_db -f sql/fixtures.sql`.
